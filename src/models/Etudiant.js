@@ -6,22 +6,12 @@ class Etudiant {
     this.email = email;
     this.date_naissance = date_naissance;
   }
-
   static validate(data) {
     const erreurs = [];
-
-    if (!data.nom) {
-      erreurs.push('Le nom est obligatoire.');
-    }
-    if (!data.prenom) {
-      erreurs.push('Le prenom est obligatoire.');
-    }
-    if (!data.email) {
-      erreurs.push('L\'email est obligatoire.');
-    }
-
+    if (!data.nom) erreurs.push('Le nom est obligatoire.');
+    if (!data.prenom) erreurs.push('Le prenom est obligatoire.');
+    if (!data.email) erreurs.push("L'email est obligatoire.");
     return erreurs;
   }
 }
-
-module.exports = Etudiant;
+export default Etudiant;

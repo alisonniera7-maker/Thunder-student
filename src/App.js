@@ -1,19 +1,18 @@
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
-const etudiantController = require('./controllers/etudiantController');
-
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import AuthRouter from './routes/AuthRouter.js';
+import EtudiantRouter from './routes/EtudiantRouter.js';
 const app = express();
-
-app.use(cors());
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || 'http://localhost:3001',
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
+app.use(cors(corsOptions));
 app.use(express.json());
-
-app.get('/etudiants', etudiantController.getAll);
-app.get('/etudiants/:id', etudiantController.getById);
-app.post('/etudiants', etudiantController.create);
-app.put('/etudiants/:id', etudiantController.update);
-app.delete('/etudiants/:id', etudiantController.remove);
-
+app.use('/auth', AuthRouter);
+app.use('/etudiants', EtudiantRouter);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log(`Serveur démarré sur http://localhost:${PORT}`);
