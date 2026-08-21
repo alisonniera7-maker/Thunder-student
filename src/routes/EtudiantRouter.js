@@ -1,0 +1,11 @@
+import { Router } from 'express';
+import * as EtudiantController from '../controllers/EtudiantController.js';
+import verifyToken from '../middleware/AuthMiddleware.js';
+const router = Router();
+router.use(verifyToken);
+router.get('/', EtudiantController.getAll);
+router.get('/:id', EtudiantController.getById);
+router.post('/', EtudiantController.create);
+router.put('/:id', EtudiantController.update);
+router.delete('/:id', EtudiantController.remove);
+export default router;
